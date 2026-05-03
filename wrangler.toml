@@ -1,0 +1,36 @@
+name = "bfms-worker"
+main = "src/index.js"
+compatibility_date = "2023-12-01"
+
+# Environment variables
+[vars]
+GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
+GOOGLE_USERINFO_URL = "https://openidconnect.googleapis.com/v1/userinfo"
+
+# D1 Database bindings
+[[d1_databases]]
+binding = "user_data"
+database_name = "user_data"
+database_id = "76137712-6274-4694-8bdf-957bb5883afc"
+
+[[d1_databases]]
+binding = "user_info"
+database_name = "user_info"
+database_id = "c3b56d4e-de8c-4b2d-a373-9568fe1e0ca7"
+
+# Route for your custom domain
+routes = [
+  { pattern = "bfms.dpdns.org/*", zone_name = "bfms.dpdns.org" }
+]
+
+# Environment-specific configurations
+[env.development]
+name = "bfms-worker-dev"
+
+[env.production]
+name = "bfms-worker-prod"
+
+# Workers AI configuration (if needed)
+[ai]
+binding = "ai"
