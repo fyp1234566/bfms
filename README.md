@@ -1,6 +1,6 @@
 # BFMS - Borrowing and Financial Management System
 
-A Cloudflare Worker with D1 database for managing item borrowing and financial operations.
+A Cloudflare Worker with D1 database for managing item borrowing and financial operations.h
 
 ## Features
 
