@@ -1,0 +1,23 @@
+{
+  "name": "bfms-worker",
+  "version": "1.0.0",
+  "description": "Borrowing and Financial Management System - Cloudflare Worker",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "db:migrate": "wrangler d1 migrations apply bfms_user_data",
+    "db:migrate:info": "wrangler d1 migrations list bfms_user_data"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20231218.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": ["bfms", "cloudflare", "worker", "d1"],
+  "author": "",
+  "license": "MIT"
+}
