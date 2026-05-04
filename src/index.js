@@ -17388,6 +17388,10 @@ async function handleGoogleLogin(request, env) {
   authUrl.searchParams.set('state', state);
 
   console.log('DEBUG: Generated Google Auth URL sent to user:', authUrl.toString());
+  console.log('DEBUG: Client ID:', env.GOOGLE_CLIENT_ID);
+  console.log('DEBUG: Redirect URI:', env.GOOGLE_REDIRECT_URI);
+  console.log('DEBUG: Scope:', scope);
+  console.log('DEBUG: State:', state);
 
   const headers = new Headers();
   headers.set('Location', authUrl.toString());
@@ -17439,22 +17443,29 @@ async function handleGoogleCallback(request, env) {
     const redirectUri = env.GOOGLE_REDIRECT_URI;
 
     // Exchange code for tokens
+    const tokenParams = new URLSearchParams();
+    tokenParams.append('code', code);
+    tokenParams.append('client_id', env.GOOGLE_CLIENT_ID);
+    tokenParams.append('client_secret', env.GOOGLE_CLIENT_SECRET);
+    tokenParams.append('redirect_uri', redirectUri);
+    tokenParams.append('grant_type', 'authorization_code');
+    
+    console.log('DEBUG: Token exchange params:', tokenParams.toString());
+    
     const tokenResponse = await fetch(GOOGLE_TOKEN_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        code,
-        client_id: env.GOOGLE_CLIENT_ID,
-        client_secret: env.GOOGLE_CLIENT_SECRET,
-        redirect_uri: redirectUri,
-        grant_type: 'authorization_code',
-      }),
+      body: tokenParams.toString(),
     });
 
     const tokenData = await tokenResponse.json();
+    console.log('DEBUG: Token response status:', tokenResponse.status);
+    console.log('DEBUG: Token response data:', tokenData);
+    console.log('DEBUG: Full token response headers:', Object.fromEntries(tokenResponse.headers.entries()));
+    
     if (!tokenResponse.ok || tokenData.error) {
-      console.error('Token exchange failed:', tokenData);
-      return new Response(`Google authentication failed: ${tokenData.error || 'Unknown error'}`, { status: 400 });
+      console.error('Token exchange failed - Status:', tokenResponse.status, 'Data:', tokenData);
+      return new Response(`Google authentication failed: ${tokenData.error || 'Unknown error'} (Status: ${tokenResponse.status})`, { status: 400 });
     }
 
     // Get user info
