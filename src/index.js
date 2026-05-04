@@ -17367,7 +17367,7 @@ async function handleRequest(request, env) {
   // --- Google OAuth 路由 ---
   if (url.pathname === '/auth/google') {
     return handleGoogleLogin(request, env);
-  } else if (url.pathname === 'https://fyp1.qzz.io/auth/google/callback') {
+  } else if (url.pathname === '/auth/google/callback') {
     return handleGoogleCallback(request, env);
   }  
   // --- 结束 Google OAuth 路由 ---

@@ -30,6 +30,3 @@ name = "bfms-worker-dev"
 [env.production]
 name = "bfms-worker-prod"
 
-# Workers AI configuration (if needed)
-[ai]
-binding = "ai"
