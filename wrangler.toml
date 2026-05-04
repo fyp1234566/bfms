@@ -8,8 +8,8 @@ GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"
 GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
 GOOGLE_USERINFO_URL = "https://openidconnect.googleapis.com/v1/userinfo"
 # Google OAuth - Set these via wrangler secret put or environment variables
-GOOGLE_CLIENT_ID = "346521843201-91p77her4ac5aspui4bldmnau8it30nh.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET = "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"
+GOOGLE_CLIENT_ID = "346521843201-7qv6qna335m40t2s0ibsotmpkqepbvjr.apps.googleusercontent.com"
+# GOOGLE_CLIENT_SECRET is set as a secret (not in vars)
 GOOGLE_REDIRECT_URI = "https://bfms.dpdns.org/auth/google/callback"
 
 # D1 Database bindings
