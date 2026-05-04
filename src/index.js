@@ -17436,7 +17436,7 @@ async function handleGoogleCallback(request, env) {
       return new Response('Missing authorization code from Google.', { status: 400 });
     }
 
-    const redirectUri = env.GOOGLE_REDIRECT_URI || new URL('/auth/google/callback', request.url).toString();
+    const redirectUri = env.GOOGLE_REDIRECT_URI;
 
     // Exchange code for tokens
     const tokenResponse = await fetch(GOOGLE_TOKEN_URL, {
